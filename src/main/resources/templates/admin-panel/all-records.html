@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="teal lighten-2">
+<!--<div>
+	Все записи:
+</div>-->
+<div th:replace="admin-panel/admintemplate :: navbar"></div>
+<div class="row">
+	<div class="col s8 teal lighten-3">
+		<table>
+			<tr>
+				<th>
+					id
+				</th>
+				<th>
+					member
+				</th>
+				<th>
+					fio
+				</th>
+				<th>
+					tournament
+				</th>
+				<th>
+					ссылка
+				</th>
+			</tr>
+			<tr th:each="record : ${records}">
+				<td th:text="${record.getId()}"></td>
+				<td th:text="${record.getMember()}"></td>
+				<td th:text="${record.getFio()}"></td>
+				<td th:text="${record.getTournament()}"></td>
+				<td>
+					<a th:href="@{/admin-panel/get-record/{id}(id=${record.getId()})}" class="btn teal darken-3 waves-effect waves-light white-text">
+						для удаления
+					</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

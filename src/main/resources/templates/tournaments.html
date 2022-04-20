@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" th:href="@{/style.css}">
+
+	<title>[[${selectedDivision}]]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body class="teal lighten-2">
+<div th:replace="maintemplate :: tournaments-with-principal(${principal}, ${tournament}, null, ${division}, ${registered}, ${admin})"></div>
+<div class="row">
+	<div class="col s9">
+		<h5 th:text="${selectedDivision}"></h5>
+		<div>
+			<th:block th:each="dd: *{dates}">
+				<div class="row no-spacing-bottom">
+					<th:block th:each="d: *{dd}">
+						<div class="col s4">
+							<div th:text="${#dates.format(d.getTime(), 'dd.MM.yyyy')}"></div>
+							<ul>
+								<th:block th:each="t: *{tournament}" th:if="${(selectedDivision!=null && t.getDivision().equals(selectedDivision) || selectedDivision==null) && #dates.format(t.getDate().getTime(), 'dd.MM.yyyy').equals(#dates.format(d.getTime(), 'dd.MM.yyyy'))}">
+									<li class="spacing-bottom">
+										<a class="btn teal darken-3 waves-effect waves-light white-text" th:href="@{/tournament/registration/{id}(id=${t.getId()})}">
+											[[${t.getName()}]], [[${#dates.format(t.getDate().getTime(), 'HH:mm')}]]
+										</a>
+									</li>
+								</th:block>
+							</ul>
+						</div>
+					</th:block>
+				</div>
+			</th:block>
+		</div>
+	</div>
+	<div class="col s3" th:insert="maintemplate :: user-info(${tournamentsRecords})"></div>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="./main.js" th:src="@{/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" th:href="@{/style.css}">
+
+	<title>Registration on tournament</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body class="teal lighten-2">
+<div th:replace="maintemplate :: tournaments-with-principal(${principal}, ${tournament}, ${selectedTournament}, ${division}, ${registered}, ${admin})"></div>
+<div class="row">
+	<div class="col s3">
+		<section>
+			<header>
+				<h5 th:text="${selectedTournament.getName()}"></h5>
+				<div th:text="'Дата: ' + ${#dates.format(selectedTournament.getDate().getTime(), 'dd.MM.yyyy HH:mm')}"></div>
+				<div th:text="'Место проведения: ' + ${selectedTournament.getAddress()}"></div>
+				<div th:text="'Рейтинг: ' + ${selectedTournament.getRatingRange()}"></div>
+				<div th:text="'Стоймость участия: ' + ${selectedTournament.getCost()} + 'руб.'"></div>
+				<div>
+					<ul class="collection with-header">
+						<li class="collection-header teal lighten-3">
+							<h6>
+								Основной состав ([[${selectedTournament.getMax()}]] участников):
+							</h6>
+							<ul>
+								<li class="collection-item teal lighten-3" th:each="r: *{recordMain}">
+									<div th:text="${r.getFio()}"></div>
+								</li>
+							</ul>
+						</li>
+						<li class="collection-header teal lighten-3">
+							<h6>
+								Запасной состав:
+							</h6>
+							<ul>
+								<li class="collection-item teal lighten-3" th:each="r: *{recordReserve}">
+									<div th:text="${r.getFio()}"></div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</header>
+			<section>
+				<form th:if="${registration != null}" name="form" th:action="@{/tournament/registration/{id}(id=${selectedTournament.getId()})}" method="post">
+						<button class="btn teal darken-3 waves-effect waves-light white-text" type="submit" th:text="${registration}">
+						</button>
+				</form>
+				<form th:if="${unregistration != null}" name="form" th:action="@{/tournament/unregistration/{id}(id=${selectedTournament.getId()})}" method="post">
+					<button class="btn teal darken-3 waves-effect waves-light white-text" type="submit" th:text="${unregistration}">
+					</button>
+				</form>
+			</section>
+		</section>
+	</div>
+	<div class="col s3 offset-s6" th:insert="maintemplate :: user-info(${tournamentsRecords})"></div>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="./main.js" th:src="@{/main.js}"></script>
+</body>
+</html>

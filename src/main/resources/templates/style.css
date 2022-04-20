@@ -1,0 +1,35 @@
+.dropdown-content {
+    top: 100% !important;
+}
+
+.spacing-right {
+    margin-right: 10px;
+}
+
+a.collection-item:hover {
+    background-color: #26a69a !important;
+}
+
+.collection {
+    border: 0;
+}
+
+a.myhover:hover {
+    background-color: #d66367 !important;
+}
+
+a.myactive {
+    background-color: #d66367 !important;
+}
+
+a.myactive:hover {
+    background-color: #c0595c !important;
+ }
+
+.spacing-bottom {
+    margin-bottom: 10px;
+}
+
+.no-spacing-bottom {
+    margin-bottom: 0;
+}

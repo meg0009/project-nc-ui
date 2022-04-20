@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="teal lighten-2">
+<!--<div>
+	Добавить турнир
+</div>-->
+<div th:replace="admin-panel/admintemplate :: navbar"></div>
+<div class="row">
+	<form class="col s8 teal lighten-3" th:action="@{/admin-panel/add-tournament}" th:object="${tournament}" method="post">
+		<div>
+			<label class="black-text">
+				Название:
+				<input type="text" th:field="*{name}">
+			</label>
+		</div>
+		<div>
+			<label class="black-text">
+				Дивизион:
+				<input type="text" th:field="*{division}">
+			</label>
+		</div>
+		<div>
+			<label class="black-text">
+				Дата:
+				<input type="datetime-local" th:field="*{date}">
+			</label>
+		</div>
+		<div>
+			<label class="black-text">
+				Рейтинг:
+				<input type="text" th:field="*{ratingRange}">
+			</label>
+		</div>
+		<div>
+			<label class="black-text">
+				Адрес:
+				<input type="text" th:field="*{address}">
+			</label>
+		</div>
+		<div>
+			<label class="black-text">
+				Номер телефона:
+				<input type="text" th:field="*{phone}">
+			</label>
+		</div>
+		<div>
+			<label class="black-text">
+				Имя организатора:
+				<input type="text" th:field="*{organizerName}">
+			</label>
+		</div>
+		<div>
+			<label class="black-text">
+				Стоимость участия:
+				<input type="text" th:field="*{cost}">
+			</label>
+		</div>
+		<div>
+			<label class="black-text">
+				Количество участников:
+				<input type="text" th:field="*{max}">
+			</label>
+		</div>
+		<div>
+<!--			<input type="submit" value="Submit">-->
+<!--			<input type="reset" value="Reset">-->
+			<button class="btn teal darken-3 waves-effect waves-light white-text" type="submit">Submit</button>
+			<button class="btn teal darken-3 waves-effect waves-light white-text" type="reset">Reset</button>
+		</div>
+	</form>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

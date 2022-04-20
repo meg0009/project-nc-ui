@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" th:href="@{/style.css}">
+
+	<style>
+		[type="radio"].darkgreen:checked + span:after,
+		[type="radio"].darkgreen.with-gap:checked + span:before,
+		[type="radio"].darkgreen.with-gap:checked + span:after {
+			border: 2px solid #00695c;
+		}
+		[type="radio"].darkgreen:checked + span:after,
+		[type="radio"].darkgreen.with-gap:checked + span:after {
+			background-color: #00695c;
+		}
+	</style>
+</head>
+<body class="teal lighten-2">
+<!--<div>
+	Удалить турнир
+</div>-->
+<div th:replace="admin-panel/admintemplate :: navbar"></div>
+<div class="row">
+	<form class="col s8 teal lighten-3" th:action="@{/admin-panel/delete-tournament}" method="post">
+		<div>
+			<ul>
+				<li th:each="tournament : *{tournaments}">
+					<label class="black-text">
+						<input class="darkgreen" type="radio" name="id" th:value="${tournament.getId()}">
+						<span th:text="${tournament.getName()}"></span>
+					</label>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<!--<input type="submit" value="Submit">
+			<input type="reset" value="Reset">-->
+			<button class="btn teal darken-3 waves-effect waves-light white-text" type="submit">Submit</button>
+			<button class="btn teal darken-3 waves-effect waves-light white-text" type="reset">Reset</button>
+		</div>
+	</form>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

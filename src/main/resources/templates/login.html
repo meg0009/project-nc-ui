@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+	<title>Login form</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body class="teal lighten-2">
+<div class="row">
+	<form class="col s4 offset-s4 teal lighten-3" th:action="@{/login}" method="post">
+		<div>
+			<label class="black-text">User name: <input type="text" name="username"></label>
+		</div>
+		<div>
+			<label class="black-text">Password: <input type="password" name="password"></label>
+		</div>
+		<div th:if="${loginError != null}" th:text="${loginError}"></div>
+		<div>
+			<button class="btn teal darken-3 waves-effect waves-light white-text" type="submit">
+				Submit
+			</button>
+		</div>
+	</form>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

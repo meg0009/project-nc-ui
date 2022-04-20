@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="teal lighten-2">
+<!--<div>
+	Записи:
+</div>-->
+<div th:replace="admin-panel/admintemplate :: navbar"></div>
+<div class="row">
+	<div class="col s8 teal lighten-3" th:if="${isPresent}">
+		<div>
+			id: <span th:text="${record.getId()}"></span>
+		</div>
+		<div>
+			User name: <span th:text="${record.getMember()}"></span>
+		</div>
+		<div>
+			ФИО: <span th:text="${record.getFio()}"></span>
+		</div>
+		<div>
+			Турнир: <span th:text="${record.getTournament()}"></span>
+		</div>
+		<div>
+			<form th:action="@{/admin-panel/delete-record}" th:object="${record}" method="post">
+				<div style="display: none">
+					<input type="text" th:field="*{id}" readonly>
+				</div>
+				<div>
+<!--					<input type="submit" value="Отменить запись">-->
+					<button class="btn teal darken-3 waves-effect waves-light white-text" type="submit">Отменить запись</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="teal lighten-3" th:if="${!isPresent}">
+		Такой записи не существует
+	</div>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

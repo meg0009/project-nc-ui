@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body class="teal lighten-2">
+<!--<div>
+	Пользователь:
+</div>-->
+<div th:replace="admin-panel/admintemplate :: navbar"></div>
+<div class="row">
+	<div class="col s8 teal lighten-3">
+		<div class="black-text">
+			User name:
+			<span th:text="${user.getUserName()}"></span>
+		</div>
+		<div class="black-text">
+			Фио:
+			<span th:text="${member.getFio()}"></span>
+		</div>
+
+		<div>
+			<form th:action="@{/admin-panel/change-user}" th:object="${user}" method="post">
+				<div style="display: none">
+					<input type="text" th:field="*{userName}" readonly>
+				</div>
+				<div>
+					Роль:
+					<select th:field="*{role}">
+						<option value="ROLE_USER">user</option>
+						<option value="ROLE_ADMIN">admin</option>
+					</select>
+
+<!--					<input type="text" th:field="*{role}">-->
+				</div>
+				<div th:object="${member}">
+					<div style="display: none">
+						<input type="text" th:field="*{id}" readonly>
+					</div>
+					<div>
+						ФИО:
+						<input type="text" th:field="*{fio}">
+					</div>
+				</div>
+				<div>
+<!--					<input type="submit" value="Сохранить изменения">-->
+					<button class="btn teal darken-3 waves-effect waves-light white-text" type="submit">Сохранить изменения</button>
+				</div>
+			</form>
+		</div>
+
+		<div>
+			<form th:action="@{/admin-panel/delete-user}" th:object="${user}" method="post">
+				<div style="display: none">
+					<input type="text" th:field="*{userName}">
+				</div>
+<!--				<input type="submit" value="Удалить пользователя">-->
+				<button class="btn teal darken-3 waves-effect waves-light white-text" type="submit">Удалить пользователя</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="./select.js" th:src="@{/select.js}"></script>
+</body>
+</html>

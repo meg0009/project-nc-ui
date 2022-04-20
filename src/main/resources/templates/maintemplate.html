@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+	<title>Registration</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body class="teal lighten-2">
+<div th:fragment="tournaments-with-principal(principal, tournament, selectedTournament, division, registered, admin)">
+	<nav>
+		<div class="nav-wrapper">
+			<div class="right" th:if="${!registered}">
+				<a class="btn teal darken-3 waves-effect waves-light spacing-right" href="/login">Войти</a>
+				<a class="btn teal darken-3 waves-effect waves-light" href="/registration">Зарегистрироваться на сайте</a>
+			</div>
+			<div class="right" th:if="${registered}">
+				<form th:if="${registered}" th:action="@{/makelogout}" method="post">
+					<button class="btn teal darken-3 waves-effect waves-light" type="submit">logout</button>
+				</form>
+			</div>
+			<div th:if="${admin}" class="right">
+				<a class="btn teal darken-3 waves-effect waves-light spacing-right" href="/admin-panel/homepage">Панель администратора</a>
+			</div>
+			<div class="right spacing-right" th:text="${principal}"></div>
+			<ul id="nav-mobile" class="left">
+				<li>
+					<a th:href="@{/tournament/registration/tournaments}">
+						Все турниры
+					</a>
+				</li>
+				<li th:each="d: *{division}" th:class="${selectedTournament!=null?(d.equals(selectedTournament.getDivision())?'active':''):''}">
+					<a th:href="@{/tournament/registration/tournaments/{id}(id=${d})}">
+						<div th:text="${d}"></div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<div class="row">
+	<div th:fragment="user-info(tournamentsRecords)">
+		<div th:if="${tournamentsRecords != null && tournamentsRecords.length != 0}" class="collection">
+			<div th:each="t: *{tournamentsRecords}">
+				<a th:class="'collection-item waves-effect waves-light btn z-depth-0 white-text myhover' + ${t==selectedTournament?' myactive':' red lighten-2'}" th:href="@{/tournament/registration/{id}(id=${t.id})}">
+					<div th:text="${t.getName()}"></div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
